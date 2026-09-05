@@ -1,0 +1,19 @@
+# Ingress (선택) — Web UI(8080) 외부 노출용. 호스트명은 환경에 맞게 수정.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: reasonix-agent-group
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: reasonix.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: reasonix-agent-group
+                port:
+                  number: 8080

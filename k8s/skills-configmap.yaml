@@ -1,0 +1,9 @@
+# Skills ConfigMap — /var/minis/skills 심링크 대상 (README 실행 레이어 참조)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agent-skills
+data:
+  README: |
+    실제 스킬 파일은 /var/minis/skills 내용을 이 ConfigMap에 넣어 마운트한다.
+    예: kubectl create configmap agent-skills --from-file=/var/minis/skills

@@ -1,0 +1,33 @@
+# Reasonix → NVIDIA NIM 연동 설정 (README "핵심 설정"과 동일)
+model:
+  provider: "openai"
+  base_url: "https://integrate.api.nvidia.com/v1"
+  api_key: "${NVIDIA_API_KEY}"
+  model: "deepseek-ai/deepseek-v4-flash"
+  temperature: 0.1
+  max_tokens: 32768
+
+cache:
+  enabled: true
+  prefix_cache: true
+
+mcp:
+  gateway:
+    enabled: true
+    port: 8081
+  servers:
+    - name: "reasonix-tools"
+      transport: "stdio"
+      command: ["reasonix", "mcp", "stdio"]
+    - name: "skills"
+      transport: "stdio"
+      command: ["reasonix", "mcp", "skills", "--skills-dir", "/workspace/skills"]
+    - name: "khs0927"
+      transport: "http"
+      url: "https://mcp.smithery.run/khs0927"
+      headers:
+        Authorization: "Bearer ${SMITHERY_API_KEY}"
+
+agent_group:
+  enabled: true
+  config: "/workspace/agent-group/agents.yaml"

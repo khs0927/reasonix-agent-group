@@ -1,0 +1,70 @@
+# K8s Deployment (README 포트 규약: 8080 Web UI / 5001 NIM API / 8081 MCP Gateway)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reasonix-agent-group
+  labels:
+    app: reasonix-agent-group
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reasonix-agent-group
+  template:
+    metadata:
+      labels:
+        app: reasonix-agent-group
+    spec:
+      containers:
+        - name: reasonix
+          image: python:3.12-slim
+          command: ["python3", "/workspace/agent-group/orchestrator.py", "run"]
+          ports:
+            - containerPort: 8080
+              name: web-ui
+            - containerPort: 5001
+              name: nim-api
+            - containerPort: 8081
+              name: mcp-gateway
+          env:
+            - name: NVIDIA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: nvidia-api-key
+                  key: api-key
+            - name: SMITHERY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: nvidia-api-key
+                  key: smithery-key
+                  optional: true
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: skills
+              mountPath: /var/minis/skills
+              readOnly: true
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: skills
+          configMap:
+            name: agent-skills
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reasonix-agent-group
+spec:
+  selector:
+    app: reasonix-agent-group
+  ports:
+    - name: web-ui
+      port: 8080
+      targetPort: 8080
+    - name: nim-api
+      port: 5001
+      targetPort: 5001
+    - name: mcp-gateway
+      port: 8081
+      targetPort: 8081

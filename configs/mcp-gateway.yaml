@@ -1,0 +1,17 @@
+# MCP Gateway 설정 — README 포트 규약과 동일 (8081)
+gateway:
+  port: 8081
+  transports: ["stdio", "sse", "http"]
+
+servers:
+  - name: "reasonix-tools"
+    transport: "stdio"
+    command: ["reasonix", "mcp", "stdio"]
+  - name: "skills"
+    transport: "stdio"
+    command: ["reasonix", "mcp", "skills", "--skills-dir", "/workspace/skills"]
+  - name: "khs0927"
+    transport: "http"
+    url: "https://mcp.smithery.run/khs0927"
+    headers:
+      Authorization: "Bearer ${SMITHERY_API_KEY}"

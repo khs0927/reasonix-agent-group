@@ -1,0 +1,36 @@
+# 실행 파이프라인 정의 (README mermaid 다이어그램과 동일)
+stages:
+  - id: "architect"
+    persona: "lead-architect"
+    task: "ADR 작성"
+    gate: "아키텍처 결정 기록이 tasks.json에 저장되어야 다음 단계로 진행"
+
+  - id: "dev"
+    persona: "senior-dev"
+    task: "구현 + 단위테스트"
+    gate: "단위테스트 전부 통과"
+
+  - id: "devops"
+    persona: "devops-engineer"
+    task: "K8s 매니페스트 + GitOps"
+    gate: "k8s/ 매니페스트 적용 가능 상태"
+
+  - id: "security"
+    persona: "security-auditor"
+    task: "위협모델링 + 스캔"
+    gate: "치명적(Critical) 이슈 0건"
+
+  - id: "qa"
+    persona: "qa-engineer"
+    task: "통합테스트 + 벤치마크"
+    gate: "통합테스트 전부 통과"
+
+  - id: "product"
+    persona: "product-owner"
+    task: "릴리즈노트 + 가이드"
+    gate: "릴리즈노트 파일 생성"
+
+  - id: "done"
+    persona: "lead-architect"
+    task: "종료 확인"
+    gate: "없음 (터미널 단계)"

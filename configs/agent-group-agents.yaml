@@ -1,0 +1,31 @@
+# 6개 페르소나 정의 (README "Human-Role Agent Group" 표와 동일)
+agents:
+  - id: "lead-architect"
+    role: "리드 아키텍트"
+    expertise: ["분산 시스템", "클라우드 네이티브", "보안 설계"]
+    mcp_profile: "architect"
+
+  - id: "senior-dev"
+    role: "시니어 개발자"
+    expertise: ["Go", "TypeScript", "Python", "TDD", "리팩토링"]
+    mcp_profile: "developer"
+
+  - id: "devops-engineer"
+    role: "데브옵스 엔지니어"
+    expertise: ["Kubernetes", "Terraform", "GitOps", "관찰성"]
+    mcp_profile: "devops"
+
+  - id: "security-auditor"
+    role: "보안 감사관"
+    expertise: ["OWASP", "공급망 보안", "SBOM", "위협 모델링"]
+    mcp_profile: "security"
+
+  - id: "product-owner"
+    role: "프로덕트 오너"
+    expertise: ["비즈니스 가치", "사용자 스토리", "우선순위"]
+    mcp_profile: "product"
+
+  - id: "qa-engineer"
+    role: "QA 엔지니어"
+    expertise: ["테스트 피라미드", "카오스 엔지니어링", "성능 벤치마크"]
+    mcp_profile: "qa"

@@ -1,0 +1,8 @@
+{
+  "_comment": "DS2API 설정 (참고용 — 현재는 NVIDIA NIM 직접 사용을 권장. README 참조)",
+  "enabled": false,
+  "reason": "브라우저 세션 토큰 필요 — 현재 비추천",
+  "base_url": "http://localhost:5001/v1",
+  "api_key": "${DEEPSEEK_API_KEY}",
+  "model": "deepseek-ai/deepseek-v4-flash"
+}
