@@ -5,3 +5,7 @@ agent-group/tasks.json
 
 # 시크릿 (커밋 절대 금지)
 .env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
